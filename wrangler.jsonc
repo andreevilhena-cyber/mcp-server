@@ -9,5 +9,11 @@
     "traces": {
       "enabled": true
     }
-  }
+  },
+  "services": [
+    {
+      "binding": "RADAR_API",
+      "service": "radar-live-api"
+    }
+  ]
 }
