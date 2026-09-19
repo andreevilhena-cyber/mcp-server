@@ -1,14 +1,15 @@
 import { McpServer, createMcpHandler } from "@modelcontextprotocol/server";
 import { z } from "zod";
-
-const RADAR_API = "https://radar-live-api.andree-vilhena.workers.dev";
+import { env } from "cloudflare:workers";
 
 async function callRadar(path: string) {
-  const response = await fetch(`${RADAR_API}${path}`, {
-    headers: {
-      Accept: "application/json"
-    }
-  });
+  const response = await (env as any).RADAR_API.fetch(
+    new Request(`https://radar-live-api${path}`, {
+      headers: {
+        Accept: "application/json"
+      }
+    })
+  );
 
   const text = await response.text();
 
